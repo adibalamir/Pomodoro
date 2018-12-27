@@ -45,8 +45,9 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      time: 125,
-      countDown: ''
+      time: 1500,
+      countDownId: '',
+      intervalInProgress: false
     }
     this.updateTime = this.updateTime.bind(this)
     this.start = this.start.bind(this)
@@ -60,15 +61,22 @@ class App extends Component {
   }
 
   start = () => {
-    let countdown = setInterval(this.updateTime, 1000)
-    this.setState({
-      countDown: countdown
-    })
+    if (this.state.intervalInProgress === false) {
+      let id = setInterval(this.updateTime, 1000)
+      this.setState({
+        countDownId: id,
+        intervalInProgress: true
+      })
+    }
   }
 
-  stop = (countDown) => {
-    clearInterval(countDown)
-    console.log('hello?')
+  stop = () => {
+    if (this.state.intervalInProgress === true) {
+      clearInterval(this.state.countDownId)
+      this.setState({
+        intervalInProgress: false
+      })
+    }
   }
 
   render() {
@@ -77,7 +85,7 @@ class App extends Component {
         <header>Pomodoro</header>
         <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} />
         <StartButton start={this.start} />
-        <StopButton stop={ () => clearInterval(this.state.countDown)} />
+        <StopButton stop={this.stop} />
       </div>
     );
   }
