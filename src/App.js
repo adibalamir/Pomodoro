@@ -21,7 +21,7 @@ class Timer extends Component {
   }
 }
 
-class TimerControls extends Component {
+class StartButton extends Component {
   render() {
     return (
       <div>
@@ -31,12 +31,26 @@ class TimerControls extends Component {
   }
 }
 
+class StopButton extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={this.props.stop} >Stop</button>
+      </div>
+    )
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      time: 125
+      time: 125,
+      countDown: ''
     }
+    this.updateTime = this.updateTime.bind(this)
+    this.start = this.start.bind(this)
+    // this.stop = this.stop.bind(this)
   }
 
   updateTime = () => {
@@ -46,10 +60,15 @@ class App extends Component {
   }
 
   start = () => {
-    setInterval(
-      this.updateTime,
-      1000
-    )
+    let countdown = setInterval(this.updateTime, 1000)
+    this.setState({
+      countDown: countdown
+    })
+  }
+
+  stop = (countDown) => {
+    clearInterval(countDown)
+    console.log('hello?')
   }
 
   render() {
@@ -57,7 +76,8 @@ class App extends Component {
       <div className="App">
         <header>Pomodoro</header>
         <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} />
-        <TimerControls start={this.start} />
+        <StartButton start={this.start} />
+        <StopButton stop={ () => clearInterval(this.state.countDown)} />
       </div>
     );
   }
