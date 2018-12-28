@@ -7,23 +7,16 @@ import Timer from './Components/Timer'
 import StartButton from './Components/StartButton'
 import StopButton from './Components/StopButton'
 import Reset from './Components/Reset'
-import sound from './timerSound.wav'
-// import Sound from 'react-sound'
+import alarm from './timerSound.wav'
 
-// class TimerInput extends Component {
+// class EditAlarm extends Component {
 //   render() {
 //     return (
 //       <div>
-
+//         <input value={this.props.minutes}/>
+//         <input value={this.props.seconds}/>
+//         <button onClick={this.props.submit}>Submit</button>
 //       </div>
-//     )
-//   }
-// }
-
-// class TimerSound extends Component {
-//   render() {
-//     return (
-//       <button onClick={() => this.props.play('timerSound.mp3')}>Play Alarm Sound</button>
 //     )
 //   }
 // }
@@ -35,7 +28,9 @@ class App extends Component {
       time: 1500,
       countDownId: '',
       intervalInProgress: false,
-      resetTime: 1500
+      resetTime: 1500,
+      minutesInput: '',
+      secondsInput: ''
     }
   }
 
@@ -66,6 +61,26 @@ class App extends Component {
 
   reset = () => { return this.setState({ time: this.state.resetTime }) }
 
+  changeMinutes = (event) => {
+    this.setState({
+      minutesInput: event.target.value
+    })
+  }
+
+  changeSeconds = (event) => {
+    this.setState({
+      secondsInput: event.target.value
+    })
+  }
+
+  handleSubmit = () => {
+    this.setState({
+      time: parseInt((this.state.minutesInput * 60), 10) + parseInt((this.state.secondsInput), 10),
+      resetTime: (this.state.minutesInput * 60) + (this.state.secondsInput)
+    })
+    console.log(typeof(this.state.time))
+  }
+
   playAudio = (url) => {
     let audio = new Audio(url)
     audio.play()
@@ -73,19 +88,22 @@ class App extends Component {
 
   render() {
     if (this.state.time === 0) {
-      this.playAudio(sound)
+      this.playAudio(alarm)
       this.stop()
     }
     return (
       <div className="App">
-        {/* <button onClick={() => this.playAudio(sound)}>Play</button> */}
         <Pomodoro pomodoro={this.pomodoro} />
         <ShortBreak shortBreak={this.shortBreak} />
         <LongBreak longBreak={this.longBreak} />
-        <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} time={this.state.time} />
+        <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} />
         <StartButton start={this.start} />
         <StopButton stop={this.stop} />
         <Reset reset={this.reset} />
+        <input value={this.state.minutesInput} onChange={this.changeMinutes} />
+        <input value={this.state.secondsInput} onChange={this.changeSeconds} />
+        <button onClick={this.handleSubmit}>Submit</button>
+        {/* <EditAlarm minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} submit={this.handleSubmit} /> */}
       </div>
     );
   }
