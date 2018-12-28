@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import Timer from './Components/Timer'
+import StartButton from './Components/StartButton'
+import StopButton from './Components/StopButton'
 
 // class TimerInput extends Component {
 //   render() {
@@ -10,36 +13,6 @@ import './App.css';
 //     )
 //   }
 // }
-
-class Timer extends Component {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.minutes}:{this.props.seconds}</h1>
-      </div>
-    )
-  }
-}
-
-class StartButton extends Component {
-  render() {
-    return (
-      <div>
-        <button onClick={this.props.start} >Start</button>
-      </div>
-    )
-  }
-}
-
-class StopButton extends Component {
-  render() {
-    return (
-      <div>
-        <button onClick={this.props.stop} >Stop</button>
-      </div>
-    )
-  }
-}
 
 class App extends Component {
   constructor(props) {
