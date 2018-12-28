@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import './App.css';
 import Pomodoro from './Components/Pomodoro'
 import ShortBreak from './Components/ShortBreak'
@@ -7,6 +7,8 @@ import Timer from './Components/Timer'
 import StartButton from './Components/StartButton'
 import StopButton from './Components/StopButton'
 import Reset from './Components/Reset'
+import sound from './timerSound.wav'
+// import Sound from 'react-sound'
 
 // class TimerInput extends Component {
 //   render() {
@@ -14,6 +16,14 @@ import Reset from './Components/Reset'
 //       <div>
 
 //       </div>
+//     )
+//   }
+// }
+
+// class TimerSound extends Component {
+//   render() {
+//     return (
+//       <button onClick={() => this.props.play('timerSound.mp3')}>Play Alarm Sound</button>
 //     )
 //   }
 // }
@@ -56,13 +66,23 @@ class App extends Component {
 
   reset = () => { return this.setState({ time: this.state.resetTime }) }
 
+  playAudio = (url) => {
+    let audio = new Audio(url)
+    audio.play()
+  }
+
   render() {
+    if (this.state.time === 0) {
+      this.playAudio(sound)
+      this.stop()
+    }
     return (
       <div className="App">
+        {/* <button onClick={() => this.playAudio(sound)}>Play</button> */}
         <Pomodoro pomodoro={this.pomodoro} />
         <ShortBreak shortBreak={this.shortBreak} />
         <LongBreak longBreak={this.longBreak} />
-        <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} />
+        <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} time={this.state.time} />
         <StartButton start={this.start} />
         <StopButton stop={this.stop} />
         <Reset reset={this.reset} />

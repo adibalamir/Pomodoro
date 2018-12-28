@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 
 class Timer extends Component {
   render() {
-    if (this.props.seconds < 10) {
+    if (this.props.seconds < 10 && this.props.minutes < 10) {
+      return (
+        <div>
+          <h1>0{this.props.minutes}:0{this.props.seconds}</h1>
+        </div>
+      )
+    } else if (this.props.seconds < 10) {
       return (
         <div>
           <h1>{this.props.minutes}:0{this.props.seconds}</h1>
