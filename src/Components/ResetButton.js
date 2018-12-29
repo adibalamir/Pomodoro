@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Reset extends Component {
+class ResetButton extends Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class Reset extends Component {
   }
 }
 
-export default Reset
+export default ResetButton

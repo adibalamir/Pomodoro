@@ -1,25 +1,14 @@
 import React, { Component } from 'react'
-import './App.css';
+import './assets/css/App.css';
 import Pomodoro from './Components/Pomodoro'
 import ShortBreak from './Components/ShortBreak'
 import LongBreak from './Components/LongBreak'
 import Timer from './Components/Timer'
 import StartButton from './Components/StartButton'
 import StopButton from './Components/StopButton'
-import Reset from './Components/Reset'
-import alarm from './timerSound.wav'
-
-// class EditAlarm extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <input value={this.props.minutes}/>
-//         <input value={this.props.seconds}/>
-//         <button onClick={this.props.submit}>Submit</button>
-//       </div>
-//     )
-//   }
-// }
+import ResetButton from './Components/ResetButton'
+import EditAlarm from './Components/EditAlarm'
+import alarm from './assets/sound/timerSound.wav'
 
 class App extends Component {
   constructor(props) {
@@ -31,6 +20,13 @@ class App extends Component {
       resetTime: 1500,
       minutesInput: '',
       secondsInput: ''
+    }
+  }
+
+  componentWillUpdate() {
+    if (this.state.time === 1) {
+      this.playAudio(alarm)
+      this.stop()
     }
   }
 
@@ -78,7 +74,6 @@ class App extends Component {
       time: parseInt((this.state.minutesInput * 60), 10) + parseInt((this.state.secondsInput), 10),
       resetTime: (this.state.minutesInput * 60) + (this.state.secondsInput)
     })
-    console.log(typeof(this.state.time))
   }
 
   playAudio = (url) => {
@@ -87,10 +82,6 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.time === 0) {
-      this.playAudio(alarm)
-      this.stop()
-    }
     return (
       <div className="App">
         <Pomodoro pomodoro={this.pomodoro} />
@@ -99,11 +90,8 @@ class App extends Component {
         <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} />
         <StartButton start={this.start} />
         <StopButton stop={this.stop} />
-        <Reset reset={this.reset} />
-        <input value={this.state.minutesInput} onChange={this.changeMinutes} />
-        <input value={this.state.secondsInput} onChange={this.changeSeconds} />
-        <button onClick={this.handleSubmit}>Submit</button>
-        {/* <EditAlarm minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} submit={this.handleSubmit} /> */}
+        <ResetButton reset={this.reset} />
+        <EditAlarm minutes={this.state.minutesInput} seconds={this.state.secondsInput} submit={this.handleSubmit} changeMinutes={this.changeMinutes} changeSeconds={this.changeSeconds} />
       </div>
     );
   }
