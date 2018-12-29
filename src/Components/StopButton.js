@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import '../assets/css/StopButton.css';
 
 class StopButton extends Component {
   render() {
     return (
-      <div>
-        <button onClick={this.props.stop} >Stop</button>
+      <div id="stop">
+      <button onClick={this.props.stop} >Stop</button>
       </div>
     )
   }

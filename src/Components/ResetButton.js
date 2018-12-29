@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import '../assets/css/ResetButton.css';
 
 class ResetButton extends Component {
   render() {
     return (
-      <div>
-        <button onClick={this.props.reset} >Reset</button>
+      <div id="reset">
+      <button onClick={this.props.reset} >Reset</button>
       </div>
     )
   }

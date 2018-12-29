@@ -83,16 +83,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Pomodoro pomodoro={this.pomodoro} />
-        <ShortBreak shortBreak={this.shortBreak} />
-        <LongBreak longBreak={this.longBreak} />
+      <main className="App">
+        <div className="timerOptions">
+          <Pomodoro pomodoro={this.pomodoro} />
+          <ShortBreak shortBreak={this.shortBreak} />
+          <LongBreak longBreak={this.longBreak} />
+        </div>
+        <div className="timer">
         <Timer minutes={Math.floor(this.state.time / 60)} seconds={this.state.time % 60} />
-        <StartButton start={this.start} />
-        <StopButton stop={this.stop} />
-        <ResetButton reset={this.reset} />
+        </div>
+        <div className="timerControls">
+          <StartButton start={this.start} />
+          <StopButton stop={this.stop} />
+          <ResetButton reset={this.reset} />
+        </div>
         <EditAlarm minutes={this.state.minutesInput} seconds={this.state.secondsInput} submit={this.handleSubmit} changeMinutes={this.changeMinutes} changeSeconds={this.changeSeconds} />
-      </div>
+      </main>
     );
   }
 }

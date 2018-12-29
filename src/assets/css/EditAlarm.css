@@ -1,0 +1,28 @@
+.editAlarmContainer {
+  -webkit-appearance: none;
+  grid-area: editAlarm;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+  '. editHeader editHeader editHeader editHeader .'
+  '. . minutes seconds . .'
+  '. . edit edit . .'
+}
+
+.editHeader {
+  grid-area: editHeader;
+}
+
+.minutes {
+  grid-area: minutes;
+}
+
+.seconds {
+  grid-area: seconds;
+}
+
+.editButton {
+  grid-area: edit;
+  padding: 2px;
+}
