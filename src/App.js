@@ -18,8 +18,8 @@ class App extends Component {
       countDownId: '',
       intervalInProgress: false,
       resetTime: 1500,
-      minutesInput: '',
-      secondsInput: ''
+      minutesInput: 0,
+      secondsInput: 0
     }
   }
 
@@ -70,8 +70,11 @@ class App extends Component {
   }
 
   handleSubmit = () => {
+    if (this.state.secondsInput.length != 0) {
+      this.setState({secondsInput: parseInt(this.state.secondsInput, 10)})
+    }
     this.setState({
-      time: parseInt((this.state.minutesInput * 60), 10) + parseInt((this.state.secondsInput), 10),
+      time: (this.state.minutesInput * 60) + this.state.secondsInput,
       resetTime: (this.state.minutesInput * 60) + (this.state.secondsInput)
     })
   }
@@ -97,7 +100,7 @@ class App extends Component {
           <StopButton stop={this.stop} />
           <ResetButton reset={this.reset} />
         </div>
-        <EditAlarm minutes={this.state.minutesInput} seconds={this.state.secondsInput} submit={this.handleSubmit} changeMinutes={this.changeMinutes} changeSeconds={this.changeSeconds} />
+        <EditAlarm minutes={this.state.minutesInput} seconds={this.state.secondsInput} submit={this.handleSubmit} changeMinutes={this.changeMinutes} changeSeconds={this.changeSeconds} time={this.state.time} />
       </main>
     );
   }
