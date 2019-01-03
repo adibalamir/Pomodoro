@@ -2,7 +2,7 @@
   font-family: 'Orbitron', sans-serif;
   text-align: center;
   display: grid;
-  background: grey;
+  background: #ffeb3ba8;
   grid-template-columns: 0.5fr 1fr 0.5fr;
   grid-template-rows: 0.25fr 0.5fr 0.25fr 0.5fr;
   grid-template-areas:
@@ -16,7 +16,7 @@ input {
   outline: none;
   -webkit-appearance: none;
   border: none;
-  border-bottom: solid 1px grey;
+  border-bottom: solid 1px antiquewhite;
   width: 2.5rem;
 }
 

@@ -2,11 +2,12 @@
   -webkit-appearance: none;
   grid-area: editAlarm;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 0.5fr 0.5fr 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr 0.5fr 0.5fr;
   grid-template-areas:
   '. editHeader editHeader editHeader editHeader .'
-  '. . minutes seconds . .'
+  '. . . . . .'
+  '. minutes minutes seconds seconds .'
   '. . edit edit . .'
 }
 
@@ -18,8 +19,26 @@
   grid-area: minutes;
 }
 
+.minutes input {
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.minutes p {
+  display: inline;
+}
+
 .seconds {
   grid-area: seconds;
+}
+
+.seconds input {
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.seconds p {
+  display: inline;
 }
 
 .editButton {
