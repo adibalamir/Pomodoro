@@ -59,20 +59,17 @@ class App extends Component {
 
   changeMinutes = (event) => {
     this.setState({
-      minutesInput: event.target.value
+      minutesInput: parseInt(event.target.value, 10)
     })
   }
 
   changeSeconds = (event) => {
     this.setState({
-      secondsInput: event.target.value
+      secondsInput: parseInt(event.target.value, 10)
     })
   }
 
   handleSubmit = () => {
-    if (this.state.secondsInput.length != 0) {
-      this.setState({secondsInput: parseInt(this.state.secondsInput, 10)})
-    }
     this.setState({
       time: (this.state.minutesInput * 60) + this.state.secondsInput,
       resetTime: (this.state.minutesInput * 60) + (this.state.secondsInput)
